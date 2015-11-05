@@ -2,8 +2,8 @@
 ## which contains household power consumption data from one household with a 
 ## one-minute sampling rate over a period of 4 years.  
 
-## This script produces a .png file containing a histogram plot of the
-## Global active power data in kilowatts, a line plot of the Global active power
+## This script produces a .png file containing a line plot of the
+## Global active power data in kilowatts, a line plot of the voltage
 ## data in kilowatts, a line plot of the 3 sub-metering records, and a line plot
 ## of global reactive power for 1-Feb-2007 and 2-Feb-2007
 

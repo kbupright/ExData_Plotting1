@@ -11,7 +11,7 @@
 ## this script requires the use of the plyr package
 ## make sure all graphics devices are off (using dev.cur() and dev.off())
 
-## library(plyr)
+##library(plyr)
 
 ## reset margins
 par(mar = c(5,4,4,2))
@@ -27,7 +27,7 @@ download.file(fileUrl, destfile = "./data/HPC.zip")
 dateDownloaded <- date()
 
 ## unzip the file to the same directory
-#unzip("./data/HPC.zip", exdir = "./data")
+unzip("./data/HPC.zip", exdir = "./data")
 
 ## set colClasses
 tab5rows <- read.table("./data/household_power_consumption.txt", header = TRUE, 
@@ -58,40 +58,32 @@ rm(classes)
 ## set up png file
 png("plot4.png", width = 480, height = 480, units = "px")
 
-## construct plot
-the_plot()
+## Construct Plot 4
+## set printing order
+par(mfrow = c(2, 2))
+
+# Plot 1
+plot(hpcdata$DateTime, hpcdata$Global_active_power, type = "l", 
+     xlab = "", ylab = "Global Active Power")
+
+# Plot 2
+plot(hpcdata$DateTime, hpcdata$Voltage, type = "l", xlab = "datetime",
+     ylab = "Voltage")
+
+# Plot 3
+plot(hpcdata$DateTime, hpcdata$Sub_metering_1, type = "l", xlab = "",
+     ylab = "Energy sub metering")
+points(hpcdata$DateTime, hpcdata$Sub_metering_2, type = "l", 
+       col = "red")
+points(hpcdata$DateTime, hpcdata$Sub_metering_3, type = "l", 
+       col = "blue")
+legend("topright", lty = 1, col = c("black", "red", "blue"), 
+       bty = "n", legend = c("Sub_metering_1", "Sub_metering_2", 
+                             "Sub_metering_3"))
+
+# Plot 4
+plot(hpcdata$DateTime, hpcdata$Global_reactive_power, type = "l", 
+     xlab = "datetime", ylab = "Global_reactive_power")
 
 dev.off()  # close PNG device
 
-## Reset par
-par(mfrow = c(1,1))
-
-the_plot = function() {
-        
-        ## Construct Plot 4
-        ## set printing order
-        par(mfrow = c(2, 2))
-        
-        # Plot 1
-        plot(hpcdata$DateTime, hpcdata$Global_active_power, type = "l", 
-             xlab = "", ylab = "Global Active Power")
-        
-        # Plot 2
-        plot(hpcdata$DateTime, hpcdata$Voltage, type = "l", xlab = "datetime",
-             ylab = "Voltage")
-        
-        # Plot 3
-        plot(hpcdata$DateTime, hpcdata$Sub_metering_1, type = "l", xlab = "",
-             ylab = "Energy sub metering")
-        points(hpcdata$DateTime, hpcdata$Sub_metering_2, type = "l", 
-               col = "red")
-        points(hpcdata$DateTime, hpcdata$Sub_metering_3, type = "l", 
-               col = "blue")
-        legend("topright", pch = "-", lwd = 3, col = c("black", "red", "blue"), 
-               bty = "n", legend = c("Sub_metering_1", "Sub_metering_2", 
-                                     "Sub_metering_3"))
-        
-        # Plot 4
-        plot(hpcdata$DateTime, hpcdata$Global_reactive_power, type = "l", 
-             xlab = "datetime", ylab = "Global_reactive_power")
-}

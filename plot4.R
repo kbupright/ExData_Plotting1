@@ -13,9 +13,6 @@
 
 ##library(plyr)
 
-## reset margins
-par(mar = c(5,4,4,2))
-
 ## check to see if directory exists, otherwise create it
 if (!file.exists("data")) {
         dir.create("data")
